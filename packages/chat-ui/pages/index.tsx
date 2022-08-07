@@ -116,9 +116,8 @@ const indices: any[] = [];
 const winning = mi.object.winning;
 const lastplay = mi.object.lastplay;
 console.log(3)
-    for (let i = 0; i <= indices.length; i++) {
       console.log(4)
-      const setup = config.tokensToJoin[indices[i]];
+      const setup = config.tokensToJoin[0];
       await ap.joinMatch(
         delegateWallet,
         {
@@ -144,9 +143,8 @@ console.log(3)
         },
         
       );
-    }      //console.log(3)
+    }      console.log(5)
 
-  }
 }
   useEffect( () =>{
     
@@ -169,7 +167,7 @@ let tAddies = addies
 // @ts-ignore
 tDiffs.push(diff)
 // @ts-ignore
-tAddies.push(u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+tAddies.push(diff.toString() + ': '+ u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
 setAddies(tAddies)
 setDiffs(tDiffs)
 let somethings: any[] = []
