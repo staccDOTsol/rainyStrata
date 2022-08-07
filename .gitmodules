@@ -13,6 +13,6 @@
 [submodule "DoYouWantToPlayAGame"]
 	path = DoYouWantToPlayAGame
 	url = https://github.com/staccDOTsol/DoYouWantToPlayAGame.git
-[submodule "raindrops"]
+[submodule "packages/raindrops"]
 	path = packages/raindrops
 	url = https://github.com/staccDOTsol/raindrops
