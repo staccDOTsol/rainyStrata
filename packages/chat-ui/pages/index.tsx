@@ -25,7 +25,7 @@ import { BN } from "bn.js";
 import { setMaxListeners } from "process";
 import { setOriginalNode } from "typescript";
 const config = {
-  "winOracle": null,
+  "winOracle": "HZvn514zNVvBTU3Q7xUgKGRaGX3nFw68tLGpZVJYei6H",
   "matchState": { "started": true },
   "winOracleCooldown": 0,
   "space": 300,
