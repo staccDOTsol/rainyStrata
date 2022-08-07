@@ -22,8 +22,6 @@ import { PublicKey } from "@solana/web3.js";
 
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
-let prev = 0;
-let not = true
 const config = {
   "winOracle": null,
   "matchState": { "started": true },
@@ -53,12 +51,14 @@ const config = {
 }
 
 const Home = () => {
+  const [prev, setPrev] = useState<number> (0)
   const [stuff, setStuff] = useState<number[]>([])
   const router = useRouter();
   const sidebar = useDisclosure();
   const [things, setThings] = useState<Element>()
   const [diffs, setDiffs] = useState([])
   const [addies, setAddies] = useState([])
+  const [not, setNot] = useState(true)
   const { keypair: delegateWallet, loading } = useDelegateWallet();
   
   async function play(){
@@ -120,7 +120,7 @@ const lastplay = matchInstance.object.lastplay;
 }
   setInterval(async function(){
     if (delegateWallet && not){
-      not = false 
+      setNot(false)
     const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
 
 
@@ -143,7 +143,7 @@ const u = matchInstance.object;
 const o = oracleInstance.object;
 
 if (lastplay != prev){
-  prev = lastplay
+  setPrev(lastplay)
 
 
 let last2 = 0
@@ -185,8 +185,8 @@ let something = (<
     setThings(something)
 }
     }}
-    not = true;
-  
+
+    setNot(true)  
   }, 1000)
   return (
     <div>
