@@ -160,7 +160,7 @@ if (lastplay != prev){
 
 
 let last2 = 0
-let now = (1000 - parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
 let diff = (now - last2)
 let tDiffs = diffs 
 let tAddies = addies 
