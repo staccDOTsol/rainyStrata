@@ -13,8 +13,8 @@
 [submodule "DoYouWantToPlayAGame"]
 	path = DoYouWantToPlayAGame
 	url = https://github.com/staccDOTsol/DoYouWantToPlayAGame.git
-[submodule "raindrops"]
-	path = raindrops
+[submodule "packages/raindrops"]
+	path = packages/raindrops
 	url = https://github.com/staccDOTsol/raindrops
 [submodule "deps/@raindrop-studios/sol-kit"]
 	path = deps/@raindrop-studios/sol-kit 
