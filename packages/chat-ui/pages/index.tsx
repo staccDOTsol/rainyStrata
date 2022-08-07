@@ -177,11 +177,11 @@ let something = (<
   borderRadius="md"
   overflow="hidden"
 >
+{addies[anis]}
 {is.map((name, index) => (
        <br key={index}>
         </br>
       ))}
-      {addies[anis]}
     </Flex>)
     somethings.push(something)
     // @ts-ignore
