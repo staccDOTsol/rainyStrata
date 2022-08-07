@@ -1,0 +1,1 @@
+{"version":3,"file":"useAnalyticsEventTracker.js","sources":["../../src/hooks/useAnalyticsEventTracker.tsx"],"sourcesContent":[null],"names":["useAnalyticsEventTracker","category","action","label","value","gtag.event"],"mappings":"+CAEaA,EAA2B,CAACC,EAAS,SAC3B,EACnBC,SAAS,mBACTC,QAAQ,kBACRC,QAAQ,MAERC,EAAW,CAACJ,WAAUC,SAAQC,QAAOC,SAAO"}

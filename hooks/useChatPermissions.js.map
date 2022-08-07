@@ -1,0 +1,1 @@
+{"version":3,"file":"useChatPermissions.js","sources":["../../src/hooks/useChatPermissions.ts"],"sourcesContent":[null],"names":["useChatPermissions","chatPermissions","chatSdk","useChatSdk","useAccount","chatPermissionsDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAAiBC,GAASG,uBAAuB"}
