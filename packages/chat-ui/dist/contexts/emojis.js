@@ -1,0 +1,2 @@
+import{jsx as e}from"react/jsx-runtime";import{createContext as r,useState as o,useCallback as i,useContext as s}from"react";const t=r({}),n=({children:r})=>{const[s,n]=o(),c=i((()=>n(void 0)),[n]),d=i((e=>{console.log(e),n(e)}),[n]);return e(t.Provider,Object.assign({value:{referenceMessageId:s,showPicker:d,hidePicker:c}},{children:r}),void 0)},c=()=>{const e=s(t);if(void 0===e)throw new Error("useEmojis must be used within a EmojisProvider");return e};export{t as EmojisContext,n as EmojisProvider,c as useEmojis};
+//# sourceMappingURL=emojis.js.map

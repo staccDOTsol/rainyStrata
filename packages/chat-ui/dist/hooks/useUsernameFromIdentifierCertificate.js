@@ -1,0 +1,2 @@
+import{useTokenMetadata as t,useAssociatedAccount as a}from"@strata-foundation/react";import{useMemo as o}from"react";function r(r,n){const{metadata:e,loading:i}=t(r),{associatedAccount:m}=a(n,r);return{loading:i,username:o((()=>{if(m&&n&&m.owner.equals(n)&&m.amount.toNumber()>=1)return e?.data.name.split(".")[0]}),[n,e,m])}}export{r as useUsernameFromIdentifierCertificate};
+//# sourceMappingURL=useUsernameFromIdentifierCertificate.js.map

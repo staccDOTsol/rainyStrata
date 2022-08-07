@@ -1,0 +1,1 @@
+{"version":3,"file":"useDelegateWalletStruct.js","sources":["../../src/hooks/useDelegateWalletStruct.ts"],"sourcesContent":[null],"names":["useDelegateWalletStruct","key","chatSdk","useChatSdk","useAccount","delegateWalletDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAAKC,GAASG,sBAAsB"}
