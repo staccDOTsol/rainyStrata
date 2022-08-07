@@ -49,14 +49,13 @@ const config = {
 }
 
 const Home = () => {
-  const [prev, setPrev] = useState<number> (0)
+  const [prev, setPrev] = useState<string> ("")
   const [stuff, setStuff] = useState<number[]>([])
   const router = useRouter();
   const sidebar = useDisclosure();
   const [things, setThings] = useState<Element>()
   const [diffs, setDiffs] = useState([])
   const [addies, setAddies] = useState([])
-  const [not, setNot] = useState(true)
   const { keypair: delegateWallet, loading } = useDelegateWallet();
   const  wallet  = useAnchorWallet()
   const [mi, setMi] = useState<any>  ()
@@ -66,23 +65,29 @@ const Home = () => {
 useEffect( () => {
   setTimeout(async function(){
   const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
-
+  let winOracle = new PublicKey(config.winOracle)
+  //console.log(123)
+// @ts-ignore
+const matchInstance = await anchorProgram.fetchMatch(winOracle);
+setMi(matchInstance)
+if (mi){
+const u = mi.object;
+if (u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length) != prev){
+  setPrev(u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+}
+}
   setAp(anchorProgram)
   //console.log(1)
  
 
   //console.log(123213)
 
-  let winOracle = new PublicKey(config.winOracle)
-    //console.log(123)
-// @ts-ignore
-const matchInstance = await anchorProgram.fetchMatch(winOracle);
-setMi(matchInstance)
-
+  
 const oracleInstance = await anchorProgram.fetchOracle(winOracle);
 setOi(oracleInstance)
 setWo(winOracle)
-  })
+
+  }, 1000 )
 }, [delegateWallet])
   async function play(){
     console.log(1)
@@ -123,62 +128,56 @@ console.log(3)
     }      console.log(5)
 
 }
-  useEffect( () =>{
-    
-      setNot(false)
+useEffect( () => {
+  if (mi){
+  const u = mi.object;
+
+    const lastplay = mi.object.lastplay.toNumber().toString();
  
-
-const u = mi.object;
-if (u.lastplay != prev){
-  setPrev(u.lastplay.toNumber())
-}
-
-
-  }, [mi])
-   useEffect( () => {
-if (mi){
-    const lastplay = mi.object.lastplay;
-    const u = mi.object;
-let last2 = 0
-let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
-let diff = (now - last2)
-let tDiffs = diffs 
-let tAddies = addies 
-// @ts-ignore
-tDiffs.push(diff)
-// @ts-ignore
-tAddies.push(diff.toString() + ': '+ u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
-setAddies(tAddies)
-setDiffs(tDiffs)
-let somethings: any[] = []
-for (var anis in diffs){
-let is: JSX.Element[] = []
-
-for (var i = 0; i < diffs[anis]  && i < 10; i++){
-  is[i] = (<br />)
-}
-let something = (<
-  Flex
-  align="center"
-  justifyContent="space-evenly"
-  w="full"
-  borderColor="primary.500"
-  borderWidth="1px"
-  borderRadius="md"
-  overflow="hidden"
->
-{addies[anis]}
-{is.map((name, index) => (
-       <br key={index}>
-        </br>
-      ))}
-    </Flex>)
-    somethings.push(something)
+    
+      let last2 = 0
+    let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+    let diff = (now - last2)
+    let tDiffs = diffs 
+    let tAddies = addies 
     // @ts-ignore
-    setThings(something)
+    tDiffs.push(diff)
+    // @ts-ignore
+    tAddies.push(diff.toString() + ': '+ u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+    setAddies(tAddies)
+    setDiffs(tDiffs)
+    let somethings: any[] = []
+    for (var anis in diffs){
+    let is: JSX.Element[] = []
+    
+    for (var i = 0; i < diffs[anis]  && i < 10; i++){
+      is[i] = (<br />)
+    }
+    let something = (<
+      Flex
+      align="center"
+      justifyContent="space-evenly"
+      w="full"
+      borderColor="primary.500"
+      borderWidth="1px"
+      borderRadius="md"
+      overflow="hidden"
+    >
+    {addies[anis]}
+    {is.map((name, index) => (
+           <br key={index}>
+            </br>
+          ))}
+        </Flex>)
+        somethings.push(something)
+    }
+    // @ts-ignore
+    setThings(somethings)
+  
 }
-}
-}, [prev])
+  
+}, [mi])
+ 
    
   return (
     <div>
@@ -193,24 +192,7 @@ let something = (<
         alignItems="bottom"
       >
         <Stack maxW="420px" gap={6}>
-         
-        {
-          things}
         <Flex
-            align="center"
-            justifyContent="space-evenly"
-            w="full"
-            borderColor="primary.500"
-            borderWidth="1px"
-            borderRadius="md"
-            overflow="hidden"
-
-          >
-        <Text>
-              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl... you disqualify if you play outside of 2-10 seconds after your last play :)
-            </Text>
-            </Flex>
-          <Flex
             align="center"
             justifyContent="space-evenly"
             w="full"
@@ -225,6 +207,23 @@ let something = (<
               Create Profile
             </ProfileButton>
           </Flex>
+        {
+          things}
+        <Flex
+            align="center"
+            justifyContent="space-evenly"
+            w="full"
+            borderColor="primary.500"
+            borderWidth="1px"
+            borderRadius="md"
+            overflow="hidden"
+
+          >
+        <Text>
+              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl... you disqualify if you play outside of 2-10 seconds after your last play :) <br /> forgot to mention, every 1000s 90% of the pot goes to the person who submits a tx after the 1k mark. Sewn ppl will enter a key of their choice and be assigned a value within that second, so we can support even more massively multiplayer nonsense 
+            </Text>
+            </Flex>
+          
           <Flex
             align="center"
             justifyContent="space-evenly"
