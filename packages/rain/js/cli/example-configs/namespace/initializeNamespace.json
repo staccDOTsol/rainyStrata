@@ -1,0 +1,31 @@
+{
+  "uuid": "e3e52d",
+  "mint": "Exr4E56htinshjpxHyAibJyKy5CxCGihyhWVmie6aAHY",
+  "metadata": "Dijj7s7BkPS7Zr75YnnNgJRZQ5y18BcyUx66B6VN1WqX",
+  "masterEdition": "Dijj7s7BkPS7Zr75YnnNgJRZQ5y18BcyUx66B6VN1WqX",
+  "prettyName": "Trash with Frens",
+  "desiredNamespaceArraySize": 2,
+  "permissivenessSettings": {
+    "namespacePermissiveness": {
+      "namespace": true
+    },
+    "itemPermissiveness": {
+      "whitelist": true
+    },
+    "playerPermissiveness": {
+      "all": true
+    },
+    "matchPermissiveness": {
+      "whitelist": true
+    },
+    "missionPermissiveness": {
+      "blacklist": true
+    },
+    "cachePermissiveness": {
+      "all": true
+    }
+  },
+  "whitelistedStakingMints": [
+    "AeVUZ6ZHBZhCHVyg7CtfE7ysRgH45iMD4k3CRLM37ffH"
+  ]
+}

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { getMatchesProgram,
   Utils,
-  State} from '../../../raindrops/js/lib/src/main'
+  State} from '../../rain/js/lib/build/main'
   const { PDA } = Utils
 
 import { useRouter } from "next/router";
@@ -100,17 +100,7 @@ const winning = matchInstance.object.winning;
             : null,
         },
         {
-          winOracle: config.winOracle
-            ? new PublicKey(config.winOracle)
-            : (
-                await PDA.getOracle(
-                  new PublicKey(config.oracleState.seed),
-
-                  config.oracleState.authority
-                    ? new PublicKey(config.oracleState.authority)
-                    : delegateWallet.publicKey
-                )
-              )[0],
+          winOracle,
           sourceType: setup.sourceType as MatchesState.TokenType,
           index:
             setup.index != null && setup.index != undefined
@@ -121,22 +111,31 @@ const winning = matchInstance.object.winning;
       );
     }      console.log(3)
 
+  }
+}
+  setInterval(async function(){
+    if (delegateWallet){
+    const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
+
+
+    let winOracle = config.winOracle
+    ? new PublicKey(config.winOracle)
+    : (
+        await PDA.getOracle(
+          new PublicKey(config.oracleState.seed),
+
+          config.oracleState.authority
+            ? new PublicKey(config.oracleState.authority)
+            : delegateWallet.publicKey
+        )
+      )[0];
+    // @ts-ignore
+    const matchInstance = await anchorProgram.fetchMatch(winOracle);
 const oracleInstance = await anchorProgram.fetchOracle(winOracle);
 
 const u = matchInstance.object;
 const o = oracleInstance.object;
-console.log(
-  "lastplay:",
-  u.lastplay.toNumber())
-  
-console.log(
-  "winningnow:",
-  u.winning.toBase58())
-  console.log(
-    "win at:",
-    u.lastthousand.toNumber())
-console.log('seconds til next winna can be chosen',
-parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+
 
 
 let last2 = 0
@@ -164,14 +163,11 @@ let something = (<
     </Flex>)
 // @ts-ignore
 setThings(something)
-  }
-  }
+    }
+  
+  }, 1000)
   return (
-    <Layout
-      isSidebarOpen={false}
-      onSidebarClose={sidebar.onClose}
-      onSidebarOpen={sidebar.onOpen}
-    >
+    <div>
       <Header onSidebarOpen={sidebar.onOpen} />
       <Stack
         px={4}
@@ -226,7 +222,7 @@ setThings(something)
           things}</Flex>
         </Stack>
       </Stack>
-    </Layout>
+    </div>
   );
 };
 
