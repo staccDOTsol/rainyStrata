@@ -16,3 +16,6 @@
 [submodule "packages/raindrops"]
 	path = packages/raindrops
 	url = https://github.com/staccDOTsol/raindrops
+[submodule "raindrops"]
+	path = raindrops
+	url = https://github.com/staccDOTsol/raindrops
