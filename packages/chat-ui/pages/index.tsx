@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { Header } from "@/components/Header";
 import { ProfileButton } from "@/components/ProfileButton";
 import { useDelegateWallet } from "src";
-import { Keypair, PublicKey } from "@solana/web3.js";
+import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
@@ -40,7 +40,7 @@ const config = {
   "tokensToJoin": [
     {
       "mint": "So11111111111111111111111111111111111111112",
-      "amount": 13800,
+      "amount": 666138,
       "sourceType": 1,
       "index": 0,
       "validationProgram": "nameAxQRRBnd4kLfsVoZBBXfrByZdZTkh8mULLxLyqV"
@@ -49,34 +49,36 @@ const config = {
 }
 
 const Home = () => {
+  const [pot, setPot ] = useState<number>(0)//FrBNQdKzxVLA2kMCSJPmYPNAC4dLE38ri8F5MMu8a1i
   const [prev, setPrev] = useState<string> ("")
   const [stuff, setStuff] = useState<number[]>([])
   const router = useRouter();
+  const [ first, setFirst ] = useState<boolean> (true)
   const sidebar = useDisclosure();
-  const [things, setThings] = useState<Element>()
+  const [things, setThings] = useState<Element[]>([])
   const [diffs, setDiffs] = useState([])
   const [addies, setAddies] = useState([])
   const { keypair: delegateWallet, loading } = useDelegateWallet();
   const  wallet  = useAnchorWallet()
   const [mi, setMi] = useState<any>  ()
   const [ap, setAp] = useState<any>  ()
-  const [oi, setOi] = useState<any>  ()
+  const [oi, setOi] = useState<boolean>  (false)
   const [wo, setWo] = useState<any>  ()
-useEffect( () => {
-  setTimeout(async function(){
-  const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
-  let winOracle = new PublicKey(config.winOracle)
-  //console.log(123)
-// @ts-ignore
-const matchInstance = await anchorProgram.fetchMatch(winOracle);
-setMi(matchInstance)
-if (mi){
-const u = mi.object;
-if (u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length) != prev){
-  setPrev(u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
-}
-}
+
+  useEffect( () => {
+    setTimeout(async function(){
+   
+    const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
+    
   setAp(anchorProgram)
+ 
+    let winOracle = new PublicKey(config.winOracle)
+    //console.log(123)
+  // @ts-ignore
+  const matchInstance = await anchorProgram.fetchMatch(winOracle);
+  setMi(matchInstance)
+
+  
   //console.log(1)
  
 
@@ -84,14 +86,130 @@ if (u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().
 
   
 const oracleInstance = await anchorProgram.fetchOracle(winOracle);
-setOi(oracleInstance)
 setWo(winOracle)
+setInterval(async function(){
+  if (!oi){
+    setOi(true)
 
-  }, 1000 )
+  } else {
+    setOi(false)
+  }
+}, 3500)
+    }, 1000)
+  }, [delegateWallet])
+  useEffect( () => {
+
+  if (delegateWallet && mi){
+    
+  
+    const u = mi.object;
+    if (u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length) != prev){
+      setPrev(u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+    console.log(prev)
+     setOi(false) }
+    }
+
+  }, [mi])
+  
+useEffect( () => {
+  let somethings: any [] = [] 
+setThings(somethings)
+setAddies([])
+setDiffs([])
 }, [delegateWallet])
+useEffect( () => {
+
+  if (delegateWallet && mi){
+    setTimeout(async function(){
+    const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
+    let connection = new Connection("https://api.devnet.solana.com")
+    let tokenAmount = await connection.getTokenAccountBalance(new PublicKey("FrBNQdKzxVLA2kMCSJPmYPNAC4dLE38ri8F5MMu8a1i"));
+console.log(tokenAmount.value.uiAmount)
+    setPot(tokenAmount.value.uiAmount as number * 0.9)
+
+  setAp(anchorProgram)
+ 
+    let winOracle = new PublicKey(config.winOracle)
+    //console.log(123)
+  // @ts-ignore
+  const matchInstance = await anchorProgram.fetchMatch(winOracle);
+  setMi(matchInstance)
+
+const u = mi.object;
+
+    const lastplay = mi.object.lastplay.toNumber().toString();
+ 
+      let last2 = mi.object.lastplay.toNumber()
+    let tAddies = addies 
+    let gogo = true
+    if (addies.length > 0){
+      
+    // @ts-ignore
+    if (lastplay == addies[addies.length-1].split(':')[0]){
+gogo = false 
+    }
+  }
+    if (gogo){
+      let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+   
+      let diff = (Math.round(now) * 100) / 100
+
+      let tDiffs = diffs 
+     // @ts-ignore
+      tAddies.push(lastplay + ': '+diff.toString() + ': '+ u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+
+      // @ts-ignore
+
+  tDiffs.push(diff)
+    setAddies(tAddies)
+    setDiffs(tDiffs)
+    console.log(diffs)
+  
+
+    let somethings: any [] = things
+    
+let c = 0
+    let is: JSX.Element[] = []
+    
+    for (var i = 0; i < diffs[diffs.length-2]  - diff  && i < 16; i++){
+      is[i + c] = (<br />)
+      c++
+    }
+    let something = (<
+      Flex key={(things.length  * 138).toString() }
+      align="center"
+      justifyContent="space-evenly"
+      w="full"
+      borderColor="primary.500"
+      borderWidth="1px"
+      borderRadius="md"
+      overflow="hidden"
+    >
+    {addies[addies.length-1]}
+    {is.map((name, index) => (
+     
+           <br key={(index + things.length).toString() }>
+            </br>
+          ))}
+        </Flex>)
+        let go = true 
+        for (var abc of somethings){
+          if (abc.toString().indexOf(u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length)) != -1){
+            go = true 
+          }
+        }
+        somethings.push(something)
+        
+   
+      somethings.reverse()
+    setThings(somethings)
+ 
+  
+    }})}
+}, [oi])
   async function play(){
     console.log(1)
-    if (delegateWallet){
+    if (delegateWallet && mi){
       
 console.log(2)
 const indices: any[] = [];
@@ -128,55 +246,6 @@ console.log(3)
     }      console.log(5)
 
 }
-useEffect( () => {
-  if (mi){
-  const u = mi.object;
-
-    const lastplay = mi.object.lastplay.toNumber().toString();
- 
-    
-      let last2 = 0
-    let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
-    let diff = (now - last2)
-    let tDiffs = diffs 
-    let tAddies = addies 
-    // @ts-ignore
-    tDiffs.push(diff)
-    // @ts-ignore
-    tAddies.push(diff.toString() + ': '+ u.winning.toBase58().toString().substring(0,3) +'...'+ u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
-    setAddies(tAddies)
-    setDiffs(tDiffs)
-    let somethings: any[] = []
-    for (var anis in diffs){
-    let is: JSX.Element[] = []
-    
-    for (var i = 0; i < diffs[anis]  && i < 10; i++){
-      is[i] = (<br />)
-    }
-    let something = (<
-      Flex
-      align="center"
-      justifyContent="space-evenly"
-      w="full"
-      borderColor="primary.500"
-      borderWidth="1px"
-      borderRadius="md"
-      overflow="hidden"
-    >
-    {addies[anis]}
-    {is.map((name, index) => (
-           <br key={index}>
-            </br>
-          ))}
-        </Flex>)
-        somethings.push(something)
-    }
-    // @ts-ignore
-    setThings(somethings)
-  
-}
-  
-}, [mi])
  
    
   return (
@@ -201,7 +270,19 @@ useEffect( () => {
             borderRadius="md"
             overflow="hidden"
 
+          > Pot is currently {pot} WSOL (devnet)
+            </Flex>
+        <Flex
+            align="center"
+            justifyContent="space-evenly"
+            w="full"
+            borderColor="primary.500"
+            borderWidth="1px"
+            borderRadius="md"
+            overflow="hidden"
+
           >
+
             <Button onClick={play}>Play</Button>
             <ProfileButton size="lg" >
               Create Profile

@@ -1,11 +1,11 @@
 import { CHAT_URL } from "@/constants/globals";
 
 const defaultSeo = {
-  title: "strata.im",
-  description: "strata.im enables fully decentralized, token gated chatrooms",
+  title: "speed2earn.games",
+  description: "speed2earn.games enables fully decentralized, token gated chatrooms",
   openGraph: {
     url: CHAT_URL,
-    title: "strata.im",
+    title: "speed2earn.games",
     description: "Token gated decentralized chatrooms on Solana",
     images: [
       {
