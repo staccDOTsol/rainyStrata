@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { getMatchesProgram,
   Utils,
-  State} from '../../../raindrops/js/lib'
+  State} from '../../raindrops/js/lib'
   const { PDA } = Utils
 
 import { useRouter } from "next/router";
