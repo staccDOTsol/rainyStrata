@@ -145,8 +145,8 @@ console.log(3)
 const lastplay = mi.object.lastplay;
 const u = mi.object;
 
-if (lastplay != prev){
-  setPrev(lastplay)
+if (u.winning.toBase58() != prev){
+  setPrev(u.winning.toBase58())
 
 
 let last2 = 0

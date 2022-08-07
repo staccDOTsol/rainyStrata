@@ -16,3 +16,9 @@
 [submodule "raindrops"]
 	path = raindrops
 	url = https://github.com/staccDOTsol/raindrops
+[submodule "deps/@raindrop-studios/sol-kit"]
+	path = deps/@raindrop-studios/sol-kit 
+	url = https://github.com/raindrop-studios/sol-kit
+[submodule "deps/@raindrop-studios/sol-commander"]
+	path = deps/@raindrop-studios/sol-commander 
+	url = https://github.com/raindrop-studios/sol-commander
