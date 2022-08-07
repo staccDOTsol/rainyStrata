@@ -1,1 +1,0 @@
-{"version":3,"file":"useSettings.js","sources":["../../src/hooks/useSettings.tsx"],"sourcesContent":[null],"names":["useSettings","settings","chatSdk","useChatSdk","useAccount","settingsDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAAUC,GAASG,gBAAgB"}

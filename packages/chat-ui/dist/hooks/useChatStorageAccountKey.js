@@ -1,2 +1,0 @@
-import{PublicKey as o}from"@solana/web3.js";import r from"bn.js";import{useAsync as e}from"react-async-hook";import{useDelegateWallet as t}from"./useDelegateWallet.js";const a=new o("2e1wdyNhUvE76y6yUCvah2KaviavMJYKoRun8acMRBZZ");function n(){const{keypair:n}=t();return e((async e=>{return e?(await(t=new o(e),n=new r(0),o.findProgramAddress([Buffer.from("storage-account"),t.toBytes(),n.toTwos(2).toArrayLike(Buffer,"le",4)],a)))[0]:void 0;var t,n}),[n?.publicKey.toBase58()])}export{n as useChatStorageAccountKey};
-//# sourceMappingURL=useChatStorageAccountKey.js.map

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Stack,
   Text,
-  Image,
   Button,
   useDisclosure,
   Flex,
@@ -10,20 +9,17 @@ import {
 import { getMatchesProgram,
   Utils,
   State} from '../../raindrops/js/lib'
-  const { PDA } = Utils
+
 
 import { useRouter } from "next/router";
-import { Layout } from "@/components/Layout";
 import { Header } from "@/components/Header";
 import { ProfileButton } from "@/components/ProfileButton";
-import { route, routes } from "../src/routes";
 import { useDelegateWallet } from "src";
-import { PublicKey } from "@solana/web3.js";
+import { Keypair, PublicKey } from "@solana/web3.js";
 
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
-import { setMaxListeners } from "process";
-import { setOriginalNode } from "typescript";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
 const config = {
   "winOracle": "HZvn514zNVvBTU3Q7xUgKGRaGX3nFw68tLGpZVJYei6H",
   "matchState": { "started": true },
@@ -62,13 +58,14 @@ const Home = () => {
   const [addies, setAddies] = useState([])
   const [not, setNot] = useState(true)
   const { keypair: delegateWallet, loading } = useDelegateWallet();
+  const  wallet  = useAnchorWallet()
   const [mi, setMi] = useState<any>  ()
   const [ap, setAp] = useState<any>  ()
   const [oi, setOi] = useState<any>  ()
   const [wo, setWo] = useState<any>  ()
-async function something(){
-  if (delegateWallet){
-  const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
+useEffect( () => {
+  setTimeout(async function(){
+  const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
 
   setAp(anchorProgram)
   //console.log(1)
@@ -85,18 +82,8 @@ setMi(matchInstance)
 const oracleInstance = await anchorProgram.fetchOracle(winOracle);
 setOi(oracleInstance)
 setWo(winOracle)
-      }
-}
-  setInterval(async function(){
-    if (delegateWallet){
-await something()
-    }
-  }, 15000)
-  setTimeout(async function(){
-    if (delegateWallet){
-await something()
-    }
-  }, 1000)
+  })
+}, [delegateWallet])
   async function play(){
     console.log(1)
     if (delegateWallet){
@@ -138,17 +125,20 @@ console.log(3)
 }
   useEffect( () =>{
     
-    if (delegateWallet && not){
       setNot(false)
  
 
-const lastplay = mi.object.lastplay;
 const u = mi.object;
-
-if (u.lastplay.toNumber()!= prev){
+if (u.lastplay != prev){
   setPrev(u.lastplay.toNumber())
+}
 
 
+  }, [mi])
+   useEffect( () => {
+if (mi){
+    const lastplay = mi.object.lastplay;
+    const u = mi.object;
 let last2 = 0
 let now = (parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
 let diff = (now - last2)
@@ -187,10 +177,8 @@ let something = (<
     // @ts-ignore
     setThings(something)
 }
-    }}
-
-    setNot(true)   
-  }, [mi])
+}
+}, [prev])
    
   return (
     <div>

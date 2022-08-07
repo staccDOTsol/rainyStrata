@@ -1,1 +1,0 @@
-{"version":3,"file":"objectWrapper.d.ts","sourceRoot":"","sources":["../../../../../src/raindrops/sol-kit/src/program/objectWrapper.ts"],"names":[],"mappings":";;AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,uBAAuB,CAAC;AAE7C,MAAM,WAAW,aAAa,CAAC,CAAC,EAAE,CAAC;IACjC,OAAO,EAAE,CAAC,CAAC;IACX,GAAG,EAAE,IAAI,CAAC,SAAS,CAAC;IACpB,MAAM,EAAE,CAAC,CAAC;IACV,IAAI,EAAE,MAAM,CAAC;CACd"}

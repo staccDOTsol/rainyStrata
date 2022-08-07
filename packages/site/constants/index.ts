@@ -2,7 +2,7 @@ export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://strataprotocol.com";
 
 export const DEFAULT_SOLANA_ENDPOINT =
-  process.env.NEXT_PUBLIC_SOLANA_API_URL || "https://api.devnet.solana.com";
+  process.env.NEXT_PUBLIC_SOLANA_API_URL || "https://devnet.genesysgo.net/";
 
 export const DEFAULT_WALLET_CONNECT = true;
 

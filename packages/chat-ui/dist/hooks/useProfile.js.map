@@ -1,1 +1,0 @@
-{"version":3,"file":"useProfile.js","sources":["../../src/hooks/useProfile.tsx"],"sourcesContent":[null],"names":["useProfile","profile","chatSdk","useChatSdk","useAccount","profileDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAASC,GAASG,eAAe"}

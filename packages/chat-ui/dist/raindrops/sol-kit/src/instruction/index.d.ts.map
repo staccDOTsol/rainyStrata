@@ -1,1 +1,0 @@
-{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../../src/raindrops/sol-kit/src/instruction/index.ts"],"names":[],"mappings":"AAEU,OAAO,EAAE,OAAO,EAAE,MAAM,kBAAkB,CAAC;AAErD,8BAAsB,WAAW;IAC/B,OAAO,EAAE,OAAO,CAAC,OAAO,CAAC;gBAEb,IAAI,EAAE;QAAE,OAAO,EAAE,OAAO,CAAC,OAAO,CAAA;KAAE;CAG/C;AAED,OAAO,KAAK,gBAAgB,MAAM,SAAS,CAAC"}

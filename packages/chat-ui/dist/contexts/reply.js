@@ -1,2 +1,0 @@
-import{jsx as e}from"react/jsx-runtime";import{createContext as r,useState as o,useCallback as i,useContext as t}from"react";const s=r({}),n=({children:r})=>{const[t,n]=o(),d=i((()=>n(void 0)),[n]),c=i((e=>{n(e)}),[n]);return e(s.Provider,Object.assign({value:{replyMessage:t,showReply:c,hideReply:d}},{children:r}),void 0)},d=()=>{const e=t(s);if(void 0===e)throw new Error("useReply must be used within a ReplyProvider");return e};export{s as ReplyContext,n as ReplyProvider,d as useReply};
-//# sourceMappingURL=reply.js.map

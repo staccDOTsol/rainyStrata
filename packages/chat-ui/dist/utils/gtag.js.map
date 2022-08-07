@@ -1,1 +1,0 @@
-{"version":3,"file":"gtag.js","sources":["../../src/utils/gtag.ts"],"sourcesContent":[null],"names":["event","action","category","label","value","GA_TRACKING_ID","IS_PRODUCTION","window","gtag","event_category","event_label"],"mappings":"4EAoBO,MAAMA,EAAQ,EAAGC,SAAQC,WAAUC,QAAOC,YAC3CC,GAAkBC,GAEpBC,OAAOC,KAAK,QAASP,EAAQ,CAC3BQ,eAAgBP,EAChBQ,YAAaP,EACbC,SAEH"}

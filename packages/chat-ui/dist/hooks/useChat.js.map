@@ -1,1 +1,0 @@
-{"version":3,"file":"useChat.js","sources":["../../src/hooks/useChat.tsx"],"sourcesContent":[null],"names":["useChat","chat","chatSdk","useChatSdk","useAccount","chatDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAAMC,GAASG,YAAY"}

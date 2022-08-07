@@ -1,2 +1,0 @@
-import{useState as n,useLayoutEffect as e,useEffect as t}from"react";const i="undefined"!=typeof window?e:t;function r(){const[e,t]=n(["100vw","100vh"]);return i((()=>{function n(){t([window.innerWidth.toString(),window.innerHeight.toString()])}return window.addEventListener("resize",n),n(),()=>window.removeEventListener("resize",n)}),[]),e}export{r as useWindowSize};
-//# sourceMappingURL=useWindowSize.js.map

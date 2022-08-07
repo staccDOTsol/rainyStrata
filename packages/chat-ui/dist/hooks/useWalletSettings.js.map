@@ -1,1 +1,0 @@
-{"version":3,"file":"useWalletSettings.js","sources":["../../src/hooks/useWalletSettings.tsx"],"sourcesContent":[null],"names":["useWalletSettings","publicKey","useWallet","key","useSettingsKey","undefined","useSettings"],"mappings":"sKAIgBA,IACd,MAAMC,UAAEA,GAAcC,KAChBC,IAAEA,GAAQC,EAAeH,QAAaI,GAE5C,OAAOC,EAAYH,EACrB"}

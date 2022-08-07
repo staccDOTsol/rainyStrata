@@ -1,2 +1,0 @@
-const e=process.env.NEXT_PUBLIC_SOLANA_URL||"https://devnet.genesysgo.net/",_=process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS||"G-M3SKCH92NY",s="production"===development,n=process.env.NEXT_PUBLIC_GIPHY_API_KEY,o=["solana","open"],L=process.env.NEXT_PUBLIC_SITE_URL;process.env.NEXT_PUBLIC_DOCS_URL,process.env.NEXT_PUBLIC_CHAT_URL;export{_ as GA_TRACKING_ID,n as GIPHY_API_KEY,s as IS_PRODUCTION,L as SITE_URL,e as SOLANA_URL,o as VISIBLE_CHATS};
-//# sourceMappingURL=globals.js.map

@@ -364,7 +364,7 @@ describe("chat", () => {
 
         // devnet provider is required because lit protocol reads from devnet, not localhost
         const devnetConnection = new Connection(
-          "https://api.devnet.solana.com"
+          "https://devnet.genesysgo.net/"
         );
         devnetProvider = new AnchorProvider(
           devnetConnection,

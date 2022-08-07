@@ -1,1 +1,0 @@
-{"version":3,"file":"useCaseInsensitiveMarker.js","sources":["../../src/hooks/useCaseInsensitiveMarker.ts"],"sourcesContent":[null],"names":["useCaseInsensitiveMarker","caseInsensitiveMarker","chatSdk","useChatSdk","useAccount","caseInsensitiveMarkerDecoder"],"mappings":"0GAKa,MAAAA,EACXC,IAEA,MAAMC,QAAEA,GAAYC,IAEpB,OAAOC,EAAWH,EAAuBC,GAASG,6BAA6B"}

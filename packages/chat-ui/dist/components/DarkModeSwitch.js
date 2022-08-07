@@ -1,2 +1,0 @@
-import{jsx as o}from"react/jsx-runtime";import{useColorMode as r,Switch as e,Icon as i}from"@chakra-ui/react";import{IoMoon as t,IoSunny as c}from"react-icons/io5";const a=()=>{const{colorMode:a,toggleColorMode:n}=r(),m="dark"===a;return o(e,Object.assign({position:"fixed",top:"1rem",right:"1rem",isChecked:m,onChange:n},{children:o(i,{as:m?t:c,color:m?"white":"black"},void 0)}),void 0)};export{a as DarkModeSwitch};
-//# sourceMappingURL=DarkModeSwitch.js.map
