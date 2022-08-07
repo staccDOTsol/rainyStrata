@@ -181,9 +181,9 @@ let something = (<
       {addies[anis]}
     </Flex>)
     somethings.push(something)
+    // @ts-ignore
+    setThings(something)
 }
-// @ts-ignore
-setThings(something)
     }}
     not = true;
   
@@ -215,7 +215,7 @@ setThings(something)
 
           >
         <Text>
-              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl...
+              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl... you disqualify if you play outside of 2-10 seconds after your last play :)
             </Text>
             </Flex>
           <Flex

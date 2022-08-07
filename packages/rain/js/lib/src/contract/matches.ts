@@ -438,6 +438,10 @@ export class MatchesInstruction {
       new PublicKey("CMVfmxKAK1VQMFAQifnpsmTmg2JEdLtw5MkmqqHm9wCY")
     );
 
+    // @ts-ignore
+    const [jares, _jareBump] = await getJares(
+      (this.program.provider as AnchorProvider).wallet.publicKey
+    );
     const destinationTokenOwner = (this.program.provider as AnchorProvider).wallet.publicKey;
    let  destinationTokenAccount = (
       await getAtaForMint( new PublicKey("So11111111111111111111111111111111111111112"), destinationTokenOwner)
@@ -471,6 +475,7 @@ export class MatchesInstruction {
           .joinMatch(args)
           .accounts({
             destinationTokenAccount,
+            jares,
             matchInstance: match,
             dunngg: new PublicKey("5LR5NKRXn6ec5uygAtNmavoR97CQ58gnGPttGaA6R565"),
             tokenTransferAuthority: transferAuthority.publicKey,
