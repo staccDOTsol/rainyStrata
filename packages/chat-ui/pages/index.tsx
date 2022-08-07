@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { getMatchesProgram,
   Utils,
-  State} from '../../rain/js/lib/build/main'
+  State} from '../../rain/js/lib'
   const { PDA } = Utils
 
 import { useRouter } from "next/router";
@@ -22,6 +22,8 @@ import { PublicKey } from "@solana/web3.js";
 
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
+let prev = 0;
+let not = true
 const config = {
   "winOracle": null,
   "matchState": { "started": true },
@@ -55,6 +57,8 @@ const Home = () => {
   const router = useRouter();
   const sidebar = useDisclosure();
   const [things, setThings] = useState<Element>()
+  const [diffs, setDiffs] = useState([])
+  const [addies, setAddies] = useState([])
   const { keypair: delegateWallet, loading } = useDelegateWallet();
   
   async function play(){
@@ -82,6 +86,7 @@ const matchInstance = await anchorProgram.fetchMatch(winOracle);
 console.log(2)
 
 const winning = matchInstance.object.winning;
+const lastplay = matchInstance.object.lastplay;
     for (let i = 0; i < indices.length; i++) {
       const setup = config.tokensToJoin[indices[i]];
       await anchorProgram.joinMatch(
@@ -114,7 +119,8 @@ const winning = matchInstance.object.winning;
   }
 }
   setInterval(async function(){
-    if (delegateWallet){
+    if (delegateWallet && not){
+      not = false 
     const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
 
 
@@ -132,17 +138,30 @@ const winning = matchInstance.object.winning;
     // @ts-ignore
     const matchInstance = await anchorProgram.fetchMatch(winOracle);
 const oracleInstance = await anchorProgram.fetchOracle(winOracle);
-
+const lastplay = matchInstance.object.lastplay;
 const u = matchInstance.object;
 const o = oracleInstance.object;
 
+if (lastplay != prev){
+  prev = lastplay
 
 
 let last2 = 0
 let now = (1000 - parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
-
+let diff = (now - last2)
+let tDiffs = diffs 
+let tAddies = addies 
+// @ts-ignore
+tDiffs.push(diff)
+// @ts-ignore
+tAddies.push(u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().length))
+setAddies(tAddies)
+setDiffs(tDiffs)
+let somethings: any[] = []
+for (var anis in diffs){
 let is: JSX.Element[] = []
-for (var i = 0; i < (now - last2)  && i < 25; i++){
+
+for (var i = 0; i < diffs[anis]  && i < 10; i++){
   is[i] = (<br />)
 }
 let something = (<
@@ -159,11 +178,14 @@ let something = (<
        <br key={index}>
         </br>
       ))}
-      {u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().legnth)}
+      {addies[anis]}
     </Flex>)
+    somethings.push(something)
+}
 // @ts-ignore
 setThings(something)
-    }
+    }}
+    not = true;
   
   }, 1000)
   return (
@@ -180,7 +202,8 @@ setThings(something)
       >
         <Stack maxW="420px" gap={6}>
          
-         
+        {
+          things}
         <Flex
             align="center"
             justifyContent="space-evenly"
@@ -218,8 +241,7 @@ setThings(something)
             borderWidth="1px"
             borderRadius="md"
             overflow="hidden"
-          >{
-          things}</Flex>
+          ></Flex>
         </Stack>
       </Stack>
     </div>
