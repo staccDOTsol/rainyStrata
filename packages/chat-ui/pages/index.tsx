@@ -76,17 +76,7 @@ async function something(){
 
   //console.log(123213)
 
-  let winOracle = config.winOracle
-  ? new PublicKey(config.winOracle)
-  : (
-      await PDA.getOracle(
-        new PublicKey(config.oracleState.seed),
-
-        config.oracleState.authority
-          ? new PublicKey(config.oracleState.authority)
-          : delegateWallet.publicKey
-      )
-    )[0];
+  let winOracle = new PublicKey(config.winOracle)
     //console.log(123)
 // @ts-ignore
 const matchInstance = await anchorProgram.fetchMatch(winOracle);
@@ -134,7 +124,7 @@ console.log(3)
             : null,
         },
         {
-          wo,
+          winOracle:wo,
           sourceType: setup.sourceType as MatchesState.TokenType,
           index:
             setup.index != null && setup.index != undefined
