@@ -1,7 +1,11 @@
 {
   "npmClient": "yarn",
   "packages": [
+    "raindrops",
+    "packages/spl*",
+    "packages/react",
     "packages/chat-ui"
+
   ],
   "useWorkspaces": true,
   "version": "3.10.0"
