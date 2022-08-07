@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Stack,
   Text,
@@ -22,6 +22,8 @@ import { PublicKey } from "@solana/web3.js";
 
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
+import { setMaxListeners } from "process";
+import { setOriginalNode } from "typescript";
 const config = {
   "winOracle": null,
   "matchState": { "started": true },
@@ -60,36 +62,61 @@ const Home = () => {
   const [addies, setAddies] = useState([])
   const [not, setNot] = useState(true)
   const { keypair: delegateWallet, loading } = useDelegateWallet();
-  
-  async function play(){
-    if (delegateWallet){
-      console.log(1)
-    const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
+  const [mi, setMi] = useState<any>  ()
+  const [ap, setAp] = useState<any>  ()
+  const [oi, setOi] = useState<any>  ()
+  const [wo, setWo] = useState<any>  ()
+async function something(){
+  if (delegateWallet){
+  const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
 
+  setAp(anchorProgram)
+  console.log(1)
+ 
 
-    const indices: any[] = [];
+  console.log(123213)
 
-    let winOracle = config.winOracle
-    ? new PublicKey(config.winOracle)
-    : (
-        await PDA.getOracle(
-          new PublicKey(config.oracleState.seed),
+  let winOracle = config.winOracle
+  ? new PublicKey(config.winOracle)
+  : (
+      await PDA.getOracle(
+        new PublicKey(config.oracleState.seed),
 
-          config.oracleState.authority
-            ? new PublicKey(config.oracleState.authority)
-            : delegateWallet.publicKey
-        )
-      )[0];
-      
+        config.oracleState.authority
+          ? new PublicKey(config.oracleState.authority)
+          : delegateWallet.publicKey
+      )
+    )[0];
+    console.log(123)
 // @ts-ignore
 const matchInstance = await anchorProgram.fetchMatch(winOracle);
-console.log(2)
+setMi(matchInstance)
 
-const winning = matchInstance.object.winning;
-const lastplay = matchInstance.object.lastplay;
+const oracleInstance = await anchorProgram.fetchOracle(winOracle);
+setOi(oracleInstance)
+setWo(winOracle)
+      }
+}
+  setInterval(async function(){
+    if (delegateWallet){
+await something()
+    }
+  }, 15000)
+  setTimeout(async function(){
+    if (delegateWallet){
+await something()
+    }
+  }, 1000)
+  async function play(){
+    if (delegateWallet){
+      
+console.log(2)
+const indices: any[] = [];
+const winning = mi.object.winning;
+const lastplay = mi.object.lastplay;
     for (let i = 0; i < indices.length; i++) {
       const setup = config.tokensToJoin[indices[i]];
-      await anchorProgram.joinMatch(
+      await ap.joinMatch(
         delegateWallet,
         {
           amount: new BN(setup.amount),
@@ -105,7 +132,7 @@ const lastplay = matchInstance.object.lastplay;
             : null,
         },
         {
-          winOracle,
+          wo,
           sourceType: setup.sourceType as MatchesState.TokenType,
           index:
             setup.index != null && setup.index != undefined
@@ -118,29 +145,14 @@ const lastplay = matchInstance.object.lastplay;
 
   }
 }
-  setInterval(async function(){
+  useEffect( () =>{
+    
     if (delegateWallet && not){
       setNot(false)
-    const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
+ 
 
-
-    let winOracle = config.winOracle
-    ? new PublicKey(config.winOracle)
-    : (
-        await PDA.getOracle(
-          new PublicKey(config.oracleState.seed),
-
-          config.oracleState.authority
-            ? new PublicKey(config.oracleState.authority)
-            : delegateWallet.publicKey
-        )
-      )[0];
-    // @ts-ignore
-    const matchInstance = await anchorProgram.fetchMatch(winOracle);
-const oracleInstance = await anchorProgram.fetchOracle(winOracle);
-const lastplay = matchInstance.object.lastplay;
-const u = matchInstance.object;
-const o = oracleInstance.object;
+const lastplay = mi.object.lastplay;
+const u = mi.object;
 
 if (lastplay != prev){
   setPrev(lastplay)
@@ -186,8 +198,9 @@ let something = (<
 }
     }}
 
-    setNot(true)  
-  }, 1000)
+    setNot(true)   
+  }, [mi])
+   
   return (
     <div>
       <Header onSidebarOpen={sidebar.onOpen} />
