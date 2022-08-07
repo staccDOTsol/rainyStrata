@@ -10,3 +10,6 @@
 [submodule "deps/cardinal-token-manager"]
 	path = deps/cardinal-token-manager
 	url = https://github.com/cardinal-labs/cardinal-token-manager.git
+[submodule "deps/cardinal-token-manager"]
+	path = DoYouWantToPlayAGame
+	url = https://github.com/staccDOTsol/DoYouWantToPlayAGame.git
