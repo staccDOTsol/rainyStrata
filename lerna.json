@@ -1,7 +1,7 @@
 {
   "npmClient": "yarn",
   "packages": [
-    "raindrops",
+    "packages/raindrops",
     "packages/spl*",
     "packages/react",
     "packages/chat-ui"
