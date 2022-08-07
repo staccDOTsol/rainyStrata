@@ -22,3 +22,9 @@
 [submodule "deps/@raindrop-studios/sol-commander"]
 	path = deps/@raindrop-studios/sol-commander 
 	url = https://github.com/raindrop-studios/sol-commander
+[submodule "packages/raindrops/deps/@raindrop-studios/sol-kit"]
+	path = packages/raindrops/deps/@raindrop-studios/sol-kit 
+	url = https://github.com/raindrop-studios/sol-kit
+[submodule "packages/raindrops/deps/@raindrop-studios/sol-commander"]
+	path = packages/raindrops/deps/@raindrop-studios/sol-commander 
+	url = https://github.com/raindrop-studios/sol-commander
