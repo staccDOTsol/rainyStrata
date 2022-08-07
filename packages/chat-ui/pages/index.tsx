@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Stack,
   Text,
@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { getMatchesProgram,
   Utils,
-  State} from '../../raindrops/js/lib/build/main'
+  State} from '../../../raindrops/js/lib/src/main'
   const { PDA } = Utils
 
 import { useRouter } from "next/router";
@@ -33,7 +33,7 @@ const config = {
   "leaveAllowed": true,
   "joinAllowedDuringStart": true,
   "oracleState": {
-    "seed": "4B54MUDkeasn6M99jQsxheprttLctMpx6AZK2NQbdhux",
+    "seed": "Ff9GNMJzhyU32wj12GD3bdUVae4xGTtS5pkdRvxvaieU",
     "authority": "CMVfmxKAK1VQMFAQifnpsmTmg2JEdLtw5MkmqqHm9wCY",
     "finalized": false,
     "tokenTransferRoot": null,
@@ -51,12 +51,16 @@ const config = {
 }
 
 const Home = () => {
+  const [stuff, setStuff] = useState<number[]>([])
   const router = useRouter();
   const sidebar = useDisclosure();
+  const [things, setThings] = useState<Element>()
   const { keypair: delegateWallet, loading } = useDelegateWallet();
+  
   async function play(){
     if (delegateWallet){
-    const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://api.devnet.solana.com");
+      console.log(1)
+    const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
 
 
     const indices: any[] = [];
@@ -75,6 +79,7 @@ const Home = () => {
       
 // @ts-ignore
 const matchInstance = await anchorProgram.fetchMatch(winOracle);
+console.log(2)
 
 const winning = matchInstance.object.winning;
     for (let i = 0; i < indices.length; i++) {
@@ -114,12 +119,56 @@ const winning = matchInstance.object.winning;
         },
         
       );
-    }
+    }      console.log(3)
+
+const oracleInstance = await anchorProgram.fetchOracle(winOracle);
+
+const u = matchInstance.object;
+const o = oracleInstance.object;
+console.log(
+  "lastplay:",
+  u.lastplay.toNumber())
+  
+console.log(
+  "winningnow:",
+  u.winning.toBase58())
+  console.log(
+    "win at:",
+    u.lastthousand.toNumber())
+console.log('seconds til next winna can be chosen',
+parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+
+
+let last2 = 0
+let now = (1000 - parseInt((u.lastthousand.toNumber() -  new Date().getTime() / 1000).toString()))
+
+let is: JSX.Element[] = []
+for (var i = 0; i < (now - last2)  && i < 25; i++){
+  is[i] = (<br />)
+}
+let something = (<
+  Flex
+  align="center"
+  justifyContent="space-evenly"
+  w="full"
+  borderColor="primary.500"
+  borderWidth="1px"
+  borderRadius="md"
+  overflow="hidden"
+>
+{is.map((name, index) => (
+       <br key={index}>
+        </br>
+      ))}
+      {u.winning.toBase58().toString().substring(0,3) + u.winning.toBase58().toString().substring(u.winning.toBase58().toString().length-3,u.winning.toBase58().toString().legnth)}
+    </Flex>)
+// @ts-ignore
+setThings(something)
   }
   }
   return (
     <Layout
-      isSidebarOpen={sidebar.isOpen}
+      isSidebarOpen={false}
       onSidebarClose={sidebar.onClose}
       onSidebarOpen={sidebar.onOpen}
     >
@@ -131,42 +180,25 @@ const winning = matchInstance.object.winning;
         w="full"
         h="full"
         justifyContent="center"
-        alignItems="center"
+        alignItems="bottom"
       >
-        <Image
-          src="./splash.png"
-          alt="strata.im splash image"
-          w={{ base: "300px", lg: "440px" }}
-        />
         <Stack maxW="420px" gap={6}>
-          <Stack alignItems={{ base: "center", lg: "start" }}>
-            <Text fontSize={{ base: "2xl", lg: "4xl" }} fontWeight="bold">
-              Welcome to strata.im
-            </Text>
-            <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="bold">
-              The first gated group chat built on Solana
-            </Text>
-            <Text fontSize={{ base: "sm", lg: "md" }}>
-              Just connect your wallet, and start chatting! All of your messages
-              run through the Solana Blockchain and are fully encrypted via Lit
-              Protocol. With strata.im, you own your chat experience.
-            </Text>
-          </Stack>
-          <Button
-            colorScheme="primary"
-            size="lg"
-            onClick={() =>
-              router.push(
-                route(routes.chat, {
-                  id: "solana",
-                }),
-                undefined,
-                { shallow: true }
-              )
-            }
+         
+         
+        <Flex
+            align="center"
+            justifyContent="space-evenly"
+            w="full"
+            borderColor="primary.500"
+            borderWidth="1px"
+            borderRadius="md"
+            overflow="hidden"
+
           >
-            Start Chatting
-          </Button>
+        <Text>
+              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl...
+            </Text>
+            </Flex>
           <Flex
             align="center"
             justifyContent="space-evenly"
@@ -175,12 +207,23 @@ const winning = matchInstance.object.winning;
             borderWidth="1px"
             borderRadius="md"
             overflow="hidden"
+
           >
             <Button onClick={play}>Play</Button>
             <ProfileButton size="lg" >
               Create Profile
             </ProfileButton>
           </Flex>
+          <Flex
+            align="center"
+            justifyContent="space-evenly"
+            w="full"
+            borderColor="primary.500"
+            borderWidth="1px"
+            borderRadius="md"
+            overflow="hidden"
+          >{
+          things}</Flex>
         </Stack>
       </Stack>
     </Layout>
