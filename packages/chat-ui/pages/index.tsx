@@ -71,10 +71,10 @@ async function something(){
   const anchorProgram = await getMatchesProgram(delegateWallet, 'devnet', "https://solana--devnet.datahub.figment.io/apikey/fff8d9138bc9e233a2c1a5d4f777e6ad");
 
   setAp(anchorProgram)
-  console.log(1)
+  //console.log(1)
  
 
-  console.log(123213)
+  //console.log(123213)
 
   let winOracle = config.winOracle
   ? new PublicKey(config.winOracle)
@@ -87,7 +87,7 @@ async function something(){
           : delegateWallet.publicKey
       )
     )[0];
-    console.log(123)
+    //console.log(123)
 // @ts-ignore
 const matchInstance = await anchorProgram.fetchMatch(winOracle);
 setMi(matchInstance)
@@ -108,13 +108,16 @@ await something()
     }
   }, 1000)
   async function play(){
+    console.log(1)
     if (delegateWallet){
       
 console.log(2)
 const indices: any[] = [];
 const winning = mi.object.winning;
 const lastplay = mi.object.lastplay;
-    for (let i = 0; i < indices.length; i++) {
+console.log(3)
+    for (let i = 0; i <= indices.length; i++) {
+      console.log(4)
       const setup = config.tokensToJoin[indices[i]];
       await ap.joinMatch(
         delegateWallet,
@@ -141,7 +144,7 @@ const lastplay = mi.object.lastplay;
         },
         
       );
-    }      console.log(3)
+    }      //console.log(3)
 
   }
 }
