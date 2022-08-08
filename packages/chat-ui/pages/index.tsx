@@ -40,7 +40,7 @@ const config = {
   "tokensToJoin": [
     {
       "mint": "So11111111111111111111111111111111111111112",
-      "amount": 666138,
+      "amount": 0,
       "sourceType": 1,
       "index": 0,
       "validationProgram": "nameAxQRRBnd4kLfsVoZBBXfrByZdZTkh8mULLxLyqV"
@@ -123,9 +123,9 @@ useEffect( () => {
     setTimeout(async function(){
     const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
     let connection = new Connection("https://api.devnet.solana.com")
-    let tokenAmount = await connection.getTokenAccountBalance(new PublicKey("FrBNQdKzxVLA2kMCSJPmYPNAC4dLE38ri8F5MMu8a1i"));
-console.log(tokenAmount.value.uiAmount)
-    setPot(tokenAmount.value.uiAmount as number * 0.9)
+    let tokenAmount = await connection.getBalance(new PublicKey("2gBHR6RezUwKGK6RYHLJxyHoYJg2LegsYoRvewVJ9nQq"));
+console.log(tokenAmount)
+    setPot((tokenAmount * 0.7) as number / 10 ** 9 )
 
   setAp(anchorProgram)
  
@@ -270,7 +270,7 @@ console.log(3)
             borderRadius="md"
             overflow="hidden"
 
-          > Pot is currently {pot} WSOL (devnet)
+          > Pot is currently {pot} SOL (devnet)
             </Flex>
         <Flex
             align="center"
@@ -301,7 +301,7 @@ console.log(3)
 
           >
         <Text>
-              Send WRAPPED sol to {delegateWallet?.publicKey.toBase58()} in order to play.. gl... you disqualify if you play outside of 2-10 seconds after your last play :) <br /> forgot to mention, every 1000s 90% of the pot goes to the person who submits a tx after the 1k mark. Sewn ppl will enter a key of their choice and be assigned a value within that second, so we can support even more massively multiplayer nonsense 
+               gl... you disqualify if you play outside of 2-10 seconds after your last play :) <br /> forgot to mention, every 1000s 90% of the pot goes to the person who submits a tx after the 1k mark. Sewn ppl will enter a key of their choice and be assigned a value within that second, so we can support even more massively multiplayer nonsense 
             </Text>
             </Flex>
           
