@@ -20,8 +20,9 @@ import { Connection, Keypair, PublicKey } from "@solana/web3.js";
 import MatchesState = State.Matches;
 import { BN } from "bn.js";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
+import { PDA } from "../../raindrops/js/lib/build/utils";
 const config = {
-  "winOracle": "HZvn514zNVvBTU3Q7xUgKGRaGX3nFw68tLGpZVJYei6H",
+  "winOracle": null,
   "matchState": { "started": true },
   "winOracleCooldown": 0,
   "space": 300,
@@ -72,7 +73,17 @@ const Home = () => {
     
   setAp(anchorProgram)
  
-    let winOracle = new PublicKey(config.winOracle)
+  let winOracle = config.winOracle
+  ? new PublicKey(config.winOracle)
+  : (
+      await PDA.getOracle(
+        new PublicKey(config.oracleState.seed),
+
+        new PublicKey(config.oracleState.authority)
+         
+      )
+    )[0];
+    
     //console.log(123)
   // @ts-ignore
   const matchInstance = await anchorProgram.fetchMatch(winOracle);
@@ -123,13 +134,24 @@ useEffect( () => {
     setTimeout(async function(){
     const anchorProgram = await getMatchesProgram(delegateWallet as Keypair, 'devnet', "https://devnet.genesysgo.net/");
     let connection = new Connection("https://api.devnet.solana.com")
-    let tokenAmount = await connection.getBalance(new PublicKey("2gBHR6RezUwKGK6RYHLJxyHoYJg2LegsYoRvewVJ9nQq"));
+    let tokenAmount = await connection.getBalance(new PublicKey("1SaskpkT2MTBNqSEkLwpvyohWkjNNBU1d1kCm4DsZw4"));
 console.log(tokenAmount)
     setPot((tokenAmount * 0.7) as number / 10 ** 9 )
 
   setAp(anchorProgram)
  
-    let winOracle = new PublicKey(config.winOracle)
+  let winOracle = config.winOracle
+  ? new PublicKey(config.winOracle)
+  : (
+      await PDA.getOracle(
+        new PublicKey(config.oracleState.seed),
+
+        config.oracleState.authority
+          ? new PublicKey(config.oracleState.authority)
+          : delegateWallet.publicKey
+      )
+    )[0];
+    
     //console.log(123)
   // @ts-ignore
   const matchInstance = await anchorProgram.fetchMatch(winOracle);
@@ -301,7 +323,7 @@ console.log(3)
 
           >
         <Text>
-               gl... you disqualify if you play outside of 2-10 seconds after your last play :) <br /> forgot to mention, every 1000s 90% of the pot goes to the person who submits a tx after the 1k mark. Sewn ppl will enter a key of their choice and be assigned a value within that second, so we can support even more massively multiplayer nonsense 
+               gl... you disqualify if you play outside of 2-10 seconds after your last play :) <br /> forgot to mention, every 1000s 70% of the pot goes to the person who submits a tx after the 1k mark. 10% dev, 20% remains! compounding innit, kek. Sewn ppl will enter a key of their choice and be assigned a value within that second, so we can support even more massively multiplayer nonsense 
             </Text>
             </Flex>
           
