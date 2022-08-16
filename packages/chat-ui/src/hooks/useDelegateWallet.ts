@@ -66,22 +66,7 @@ interface DelegateWalletReturn {
 }
 export function useDelegateWallet(): DelegateWalletReturn {
   const { publicKey } = useWallet();
-  const [legacyDelegateData] = useLocalStorage(
-    publicKey ? delegateWalletStorage.storageKey(publicKey) : "",
-    undefined
-  );
-  const delegateWalletLegacy = useMemo(() => {
-    if (legacyDelegateData && publicKey) {
-      try {
-        if (legacyDelegateData) {
-          return delegateWalletStorage.getDelegateWallet(publicKey);
-        }
-      } catch (e: any) {
-        // ignore
-        console.error(e);
-      }
-    }
-  }, [legacyDelegateData, publicKey?.toBase58()]);
+ 
   const { info: settings, account, loading } = useWalletSettings();
   const {
     loading: loadingMnemonic,
@@ -101,9 +86,11 @@ export function useDelegateWallet(): DelegateWalletReturn {
   return {
     error,
     loading: loadingMnemonic || loading || Boolean(!settings && account),
-    legacyKeypair: delegateWalletLegacy,
+    // @ts-ignore
+    legacyKeypair: null,
     mnemonic: mnemonic,
     keypair,
-    legacyMnemonic: legacyDelegateData,
+    // @ts-ignore
+    legacyMnemonic: null,
   };
 }

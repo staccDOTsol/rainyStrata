@@ -4,7 +4,7 @@ export const SOLANA_URL =
 export const NFT_STORAGE_API_KEY = process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY;
 
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://speed2earn.games";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://hackblock.space";
 
 export const WUMBO_IDENTITY_SERVICE_URL =
   process.env.NEXT_PUBLIC_WUMBO_IDENTITY_SERVICE_URL || "http://localhost:8082";

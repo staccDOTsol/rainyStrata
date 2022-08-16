@@ -94,6 +94,7 @@ export function useLoadDelegate() {
   const { chatSdk } = useChatSdk();
 
   return {
+    
     delegateWallet,
     mnemonic,
     loadingNeeds:
