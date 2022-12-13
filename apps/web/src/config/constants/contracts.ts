@@ -132,8 +132,8 @@ export default {
   },
   // TODO: multi
   zap: {
-    56: '0xD4c4a7C55c9f7B3c48bafb6E8643Ba79F42418dF',
-    97: '0xD85835207054F25620109bdc745EC1D1f84F04e1',
+    56: '0xb4aB71072F356301d03DBdf6Ad8690E9eA5ADA1a',
+    97: '0x8211ecbf4fc0db4ceb0a1ca6b9887530e4fa6549',
   },
   iCake: {
     56: '0x3C458828D1622F5f4d526eb0d24Da8C4Eb8F07b1',

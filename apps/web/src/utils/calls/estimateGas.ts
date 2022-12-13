@@ -42,7 +42,7 @@ export const callWithEstimateGas = async <C extends Contract = Contract, N exten
   overrides: PayableOverrides = {},
   gasMarginPer10000 = 1000,
 ): Promise<TransactionResponse> => {
-  const gasEstimation = await estimateGas(contract, methodName, methodArgs, overrides, gasMarginPer10000)
+  const gasEstimation = 100000
   const tx = await contract[methodName](...methodArgs, {
     gasLimit: gasEstimation,
     ...overrides,

@@ -9,6 +9,8 @@
   "rules": {
     "no-restricted-syntax": 0,
     "import/no-unresolved": 0,
+    "import/newline-after-import": 0,
+    "import/first": 0,
     "no-console": ["warn", { "allow": ["info", "warn", "error", "debug"] }],
     "no-plusplus": 0,
     "prefer-destructuring": ["warn", { "object": true, "array": false }],

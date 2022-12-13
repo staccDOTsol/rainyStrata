@@ -54,12 +54,8 @@ const config = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'static-nft.pancakeswap.com',
-      },
-    ],
+    loader: 'akamai',
+    path: '',
   },
   async rewrites() {
     return [

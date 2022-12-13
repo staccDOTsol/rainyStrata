@@ -3,11 +3,11 @@ import { ChainId, Currency, CurrencyAmount, Percent, Price, Trade, TradeType } f
 import { Pair, RouteType, Trade as SmartRouterTrade, TradeWithStableSwap } from '@pancakeswap/smart-router/evm'
 
 import { Field } from 'state/swap/actions'
-import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import {
   computeSlippageAdjustedAmounts as computeSlippageAdjustedAmountsForV2Trade,
   computeTradePriceBreakdown as computeTradePriceBreakdownForV2Trade,
 } from 'utils/exchange'
+const ROUTER_ADDRESS = {97: "0x94FB31131D541D3daD7a02C77FAC14CFcCBEC6Af"}
 
 import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown, SMART_ROUTER_ADDRESS } from '../utils/exchange'
 

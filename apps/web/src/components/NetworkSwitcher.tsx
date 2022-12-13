@@ -59,7 +59,7 @@ const NetworkSelect = ({ switchNetwork, chainId }) => {
         style={{ justifyContent: 'flex-start' }}
         as="a"
         target="_blank"
-        href="https://aptos.pancakeswap.finance/swap"
+        href="https://aptos.atfault.dev/swap"
       >
         <Image
           src="https://aptos.pancakeswap.finance/images/apt.png"

@@ -26,7 +26,7 @@ export class Pair {
   private readonly tokenAmounts: [CurrencyAmount<Currency>, CurrencyAmount<Currency>]
 
   public static sortToken(tokenA: Currency, tokenB: Currency): [Currency, Currency] {
-    const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // it does safety checks
+    const [token0, token1] =[tokenA, tokenB] 
     return [token0, token1]
   }
 

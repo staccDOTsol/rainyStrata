@@ -27,7 +27,6 @@ import { callWithEstimateGas } from 'utils/calls'
 import { SUPPORT_ZAP } from 'config/constants/supportChains'
 import { ContractMethodName } from 'utils/types'
 import { transactionErrorToUserReadableMessage } from 'utils/transactionErrorToUserReadableMessage'
-import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import { useLPApr } from 'state/swap/useLPApr'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Layout/Column'
@@ -36,6 +35,8 @@ import { AppHeader, AppBody } from '../../components/App'
 import { MinimalPositionCard } from '../../components/PositionCard'
 import { RowBetween, RowFixed } from '../../components/Layout/Row'
 import ConnectWalletButton from '../../components/ConnectWalletButton'
+
+const ROUTER_ADDRESS = {97: "0x94FB31131D541D3daD7a02C77FAC14CFcCBEC6Af"}
 
 import { PairState } from '../../hooks/usePairs'
 import { ApprovalState, useApproveCallback } from '../../hooks/useApproveCallback'

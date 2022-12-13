@@ -9,8 +9,8 @@ import {
   BLOCKED_PRICE_IMPACT_NON_EXPERT,
   INPUT_FRACTION_AFTER_FEE,
   ONE_HUNDRED_PERCENT,
-  ROUTER_ADDRESS,
 } from 'config/constants/exchange'
+const ROUTER_ADDRESS = {97: "0x94FB31131D541D3daD7a02C77FAC14CFcCBEC6Af"}
 
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import { useContract } from 'hooks/useContract'

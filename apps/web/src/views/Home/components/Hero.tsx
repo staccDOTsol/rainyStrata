@@ -125,10 +125,10 @@ const Hero = () => {
       >
         <Flex flex="1" flexDirection="column">
           <Heading scale="xxl" color="secondary" mb="24px">
-            {t('The moon is made of pancakes.')}
+            {t('The moon is made of stacced pancakes.')}
           </Heading>
           <Heading scale="md" mb="24px">
-            {t('Trade, earn, and win crypto on the most popular decentralized platform in the galaxy.')}
+            {t('The problem with uniswap and all the clones doesn&#x27;t seem obvious  as I&#x27;d always assumed it would work the correct way,  before messing with the code.  I needed it to work correctly, and so I birthed this very much improved clone.  You can now have both TokenA &lt;-&gt; TokenB and TokenB &lt;-&gt; TokenA markets.  Let the fun begin.  Love you all,  twitter.com/@staccoverflow')}
           </Heading>
           <Flex>
             {!account && <ConnectWalletButton mr="8px" />}

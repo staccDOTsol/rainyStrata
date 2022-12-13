@@ -58,7 +58,7 @@ export async function getPairs(currencyPairs: CurrencyPair[], { provider, chainI
 
     if (!tokenA || !tokenB || tokenA.equals(tokenB)) return [PairState.INVALID, null]
 
-    const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
+    const [token0, token1] = [tokenA, tokenB]
 
     const { reserve0, reserve1 } = result
     return [

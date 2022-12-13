@@ -4,7 +4,6 @@ import { useTranslation } from '@pancakeswap/localization'
 import { Currency, CurrencyAmount, Trade, TradeType } from '@pancakeswap/sdk'
 import { useToast } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
-import { ROUTER_ADDRESS } from 'config/constants/exchange'
 import { useCallback, useMemo } from 'react'
 import { logError } from 'utils/sentry'
 import { Field } from '../state/swap/actions'
@@ -15,7 +14,7 @@ import useGelatoLimitOrdersLib from './limitOrders/useGelatoLimitOrdersLib'
 import { useCallWithGasPrice } from './useCallWithGasPrice'
 import { useTokenContract } from './useContract'
 import useTokenAllowance from './useTokenAllowance'
-
+const ROUTER_ADDRESS = {97: "0x94FB31131D541D3daD7a02C77FAC14CFcCBEC6Af"}
 export enum ApprovalState {
   UNKNOWN,
   NOT_APPROVED,

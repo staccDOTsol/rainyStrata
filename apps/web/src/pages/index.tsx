@@ -1,5 +1,4 @@
 import { formatEther } from '@ethersproject/units'
-import { FACTORY_ADDRESS } from '@pancakeswap/sdk'
 import { getUnixTime, sub } from 'date-fns'
 import { gql } from 'graphql-request'
 import { GetStaticProps } from 'next'
@@ -9,7 +8,7 @@ import { getCakeContract } from 'utils/contractHelpers'
 import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 import { bitQueryServerClient, infoServerClient } from 'utils/graphql'
 import Home from '../views/Home'
-
+const FACTORY_ADDRESS = "0x993D06BCaA13fD46a74748de39fE12EcDB26c991"
 const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
   return (
     <SWRConfig

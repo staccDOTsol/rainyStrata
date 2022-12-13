@@ -34,7 +34,8 @@ export const computePairAddress = ({
   tokenA: ERC20Token
   tokenB: ERC20Token
 }): string => {
-  const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA] // does safety checks
+  const [token0, token1] =[tokenA, tokenB]
+
   const key = composeKey(token0, token1)
 
   if (PAIR_ADDRESS_CACHE?.[key] === undefined) {
